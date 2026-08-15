@@ -22,3 +22,13 @@ most demo-destroying failure) into "crosshair doesn't blink."
 **Consequences**
 - Phase-1 DoD survives contact with a real desk: a waving hand near the pad no longer
   moves the crosshair.
+- **Absence gate (from review):** to protect freeze-on-absence, if even the nearest
+  qualifying contour sits farther than `absent_radius_mult` (default 2.5) × the mouse's
+  last observed length from the frozen anchor, it is treated as absent (a hand left
+  waving after the mouse is lifted), so the crosshair freezes instead of retargeting
+  onto the hand. Continuity applied to absence detection — no shape machinery.
+- **Known trade-off (decided):** the same gate would also freeze a *present* mouse that
+  moves more than `absent_radius_mult` mouse-lengths in a single frame — an extreme
+  flick (~2.5 m/s of hand motion at 25fps), unlikely in normal use. It is recoverable
+  via the always-live seed tap, and normal motion stays well under the threshold. This
+  is accepted to keep the far-hand freeze robust.
