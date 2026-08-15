@@ -46,7 +46,7 @@ def test_large_bright_mouse_is_not_suppressed_by_its_own_mean():
     # pad background as the luminance reference so a large mouse still survives.
     background = np.full((100, 100), 40, dtype=np.uint8)
     frame = np.full((100, 100), 40, dtype=np.uint8)
-    frame[30:70, 30:70] = 200  # mouse covers 40% of the frame, much brighter
+    frame[30:70, 30:70] = 200  # mouse covers ~16% of the area, much brighter
 
     normalized = normalize_luminance(frame, background)
     diff = np.abs(normalized.astype(np.int16) - background.astype(np.int16))
